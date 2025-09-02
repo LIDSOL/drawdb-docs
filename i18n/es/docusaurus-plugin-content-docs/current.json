@@ -1,0 +1,10 @@
+{
+  "version.label": {
+    "message": "Next",
+    "description": "The label for the version dropdown"
+  },
+  "sidebar.tutorialSidebar.category.Tutorials": {
+    "message": "Tutoriales",
+    "description": "The label for the Tutorials category in the sidebar"
+  }
+}
