@@ -30,22 +30,3 @@ You can customize editor settings in the `View` menu.
 | Zoom in | Set editor zoom | Ctrl+(Wheel/Up) |
 | Zoom out | Set editor zoom | Ctrl+(Wheel/Down) |
 | Fullscreen | Enter fullscreen | N/A |
-
-To personalize your default settings you can select the default option on your settings menu to change various aspects such as fefault data type, change if null or not null is default,change to capital letters among other things.
-
-
-<div style={{ textAlign: "center" }}>
-  <ThemedImage
-    lightImageSrc={require("./img/light/Default1.jpeg").default}
-    darkImageSrc={require("./img/dark/Default1.jpeg").default}
-    alt="New File"
-  />
-</div>
-
-<div style={{ textAlign: "center" }}>
-  <ThemedImage
-    lightImageSrc={require("./img/light/Default2.jpeg").default}
-    darkImageSrc={require("./img/dark/Default2.jpeg").default}
-    alt="New File"
-  />
-</div>
