@@ -11,12 +11,12 @@ import FAQ from '../src/components/FAQ';
 To begin, go to the [online editor](https://www.drawdb.app/editor). If a previous digram gets loaded you can go to `File > New` and pick the blank diagram option.
 
 <Flex>
-<ThemedImage 
+<ThemedImage
     lightImageSrc={require("./img/light/file-new.png").default}
     darkImageSrc={require("./img/dark/file-new.png").default}
     alt="New File"
 />
-<ThemedImage 
+<ThemedImage
     lightImageSrc={require("./img/light/create-blank-diagram.png").default}
     darkImageSrc={require("./img/dark/create-blank-diagram.png").default}
     alt="Create a blank diagram"
@@ -37,6 +37,9 @@ The following databases are supported:
 - SQLite
 - MariaDB
 - MSSQL
+- Oracle
+
+For the moment the import SQL diagram has not been enabled for Oracle Data Base.
 
 <ThemedImage
     lightImageSrc={require("./img/light/pick-db.png").default}
@@ -49,8 +52,8 @@ The following databases are supported:
 Add tables either from the sidebar or the toolbar and define columns.
 
 <ThemedImage
-    lightImageSrc={require("./img/light/define-tables.gif").default} 
-    darkImageSrc={require("./img/dark/define-tables.gif").default} 
+    lightImageSrc={require("./img/light/define-tables.gif").default}
+    darkImageSrc={require("./img/dark/define-tables.gif").default}
     alt="Define tables"
 />
 
@@ -80,6 +83,12 @@ The check constraint will be injected into the SQL output as is.
 
 :::
 
+:::info
+
+You can create attributes sequentially by pressing enter in the last field.
+
+:::
+
 ### Indexes
 
 You can define the following fields for an index:
@@ -90,7 +99,7 @@ You can define the following fields for an index:
 
 ## Relationships
 
-To create relationships and define foreign keys, click and hold the blue dot on the foreign key column, then drag and drop it onto the primary column. This action follows the logic of `start_col REFERENCES end_col`, where the column you drag from will be designated as the foreign key, linking it to the primary key in the destination column.
+To create a relationship and define foreign keys, click and hold the blue dot on the primary key and drag it to the table with which you want to form the relationship. This will cause a new row to be automatically generated in the child table that will have the primary key information.
 
 <ThemedImage
     lightImageSrc={require("./img/light/create-relationship.gif").default}
@@ -98,17 +107,31 @@ To create relationships and define foreign keys, click and hold the blue dot on 
     alt="Create a relationship"
 />
 
-E.g. in the image above, since `posts.user_id` is the foreign key we start dragging from `user_id` to `users.id`.
+The gif shows one of three possible notations selectable in the modeler; for each notation, the rendering and some actions may change.
 
-If at some point you realize that the keys are flipped you can swap them from the `Relationships` tab. Open the relationship you'd like to edit, click on the more button (three dots) next to the primary and forign columns, and then swap.
+<!--If at some point you realize that the keys are flipped you can swap them from the `Relationships` tab. Open the relationship you'd like to edit, click on the more button (three dots) next to the primary and forign columns, and then swap. -->!
+
+To delete the relationship, simply double-click on the relationship and select the delete button or delete the auto-generated foreign key from the table.
 
 You can define the following fields for a relationship:
 
 - Name
+- Relationship type
+    - One to One
+    - One to Many
+    - Subtype
 - Cardinality
-  - One to One
-  - One to Many
-  - Many to One
+    - Only available for One to one
+        - (0,1)
+        - (0,1)
+    - Only available for One to Many
+        - (0,*)
+        - (1,*)
+- Subtype restriction (Only available for Subtype relations)
+    - Disjoint Total
+    - Disjoint Partial
+    - Overlaping Total
+    - Overlaping Partial
 - On Delete Action
 - On Update Action
   - No action
