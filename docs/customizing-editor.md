@@ -22,7 +22,7 @@ You can customize editor settings in the `View` menu.
 | Field details | Disable showing pop ups when you hover over tables | Ctrl+Shift+F |
 | Reset view | Set the canvas cooridantes and zoom to default | Ctrl+R |
 | Show grid | Toggle the canvas grid | Ctrl+Shift+G |
-| Show cardinality | Toggle showing cardinality labels(1, n) for relationships | N/A |
+| Show cardinality | Toggle showing cardinality labels(1, *) for relationships | N/A |
 | Notation | Set notation style for relationships | N/A |
 | Show relationship labels | Toggle showing relationship names on the diagram | N/A |
 | Show debug coordinates | Display debug coordinate information | N/A |

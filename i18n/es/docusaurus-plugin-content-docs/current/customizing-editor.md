@@ -22,7 +22,8 @@ Puedes personalizar la configuración del editor en el menú `Ver`.
 | Detalles del campo | Desactivar la aparición de ventanas emergentes al pasar el ratón por encima de las tablas | Ctrl+Shift+F |
 | Restablecer vista | Establecer las coordenadas y el zoom del lienzo a los valores predeterminados | Ctrl+R |
 | Mostrar cuadrícula | Alternar la cuadrícula del lienzo | Ctrl+Shift+G |
-| Mostrar cardinalidad | Alternar la visualización de las etiquetas de cardinalidad (1, n) para las relaciones | N/A |
+| Mostrar cardinalidad | Alternar la visualización de las etiquetas de cardinalidad (1, *) para las relaciones | N/A |
+| Notación | Establecer el estilo de notación para las relaciones | N/A |
 | Mostrar etiquetas de relación | Alternar la visualización de los nombres de las relaciones en el diagrama | N/A |
 | Mostrar coordenadas de depuración | Mostrar información de coordenadas de depuración | N/A |
 | Tema | Establecer el tema del editor en oscuro o claro | N/A |

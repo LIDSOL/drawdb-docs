@@ -71,6 +71,14 @@ You can define the following fields for a column:
 - Check constraint
 - Comment
 
+Although only Name, Datatype, Not null and Primary are visible from the settings panel, the other fields can be defined in the column edit panel that will open when clicking on the three dots icon.
+
+<ThemedImage
+    lightImageSrc={require("./img/light/more-options-fields.png").default}
+    darkImageSrc={require("./img/dark/more-options-fields.png").default}
+    alt="Edit fields"
+/>
+
 :::info
 
 If multiple primary keys are defined a composite primary key will be generated in the SQL output.
@@ -89,6 +97,12 @@ You can create attributes sequentially by pressing enter in the last field.
 
 :::
 
+:::info
+
+To define an attribute as primary key, select the checkbox with a key icon. If you want the attribute to be nullable or not nullable, select the checkbox with a question mark icon.
+
+:::
+
 ### Indexes
 
 You can define the following fields for an index:
@@ -99,7 +113,7 @@ You can define the following fields for an index:
 
 ## Relationships
 
-To create a relationship and define foreign keys, click and hold the blue dot on the primary key and drag it to the table with which you want to form the relationship. This will cause a new row to be automatically generated in the child table that will have the primary key information.
+To create a relationship and define foreign keys, long-press the blue dot on the primary key and drag it to the table you want to establish the relationship with. This will automatically generate the foreign key in the secondary table, which will contain the primary key information.
 
 <ThemedImage
     lightImageSrc={require("./img/light/create-relationship.gif").default}
@@ -111,7 +125,17 @@ The gif shows one of three possible notations selectable in the modeler; for eac
 
 <!--If at some point you realize that the keys are flipped you can swap them from the `Relationships` tab. Open the relationship you'd like to edit, click on the more button (three dots) next to the primary and forign columns, and then swap. -->!
 
+:::info
+
 To delete the relationship, simply double-click on the relationship and select the delete button or delete the auto-generated foreign key from the table.
+
+:::
+
+:::info
+
+To switch between identifying and non-identifying relationships, simply double-click, select the edit icon, or open the child table's configuration panel and modify the primary key attribute. If the foreign key is also part of the primary key, the relationship will be identifying; otherwise, it will be non-identifying.
+
+:::
 
 You can define the following fields for a relationship:
 
@@ -123,7 +147,7 @@ You can define the following fields for a relationship:
 - Cardinality
     - Only available for One to one
         - (0,1)
-        - (0,1)
+        - (1,1)
     - Only available for One to Many
         - (0,*)
         - (1,*)
@@ -139,6 +163,25 @@ You can define the following fields for a relationship:
   - Cascade
   - Set null
   - Set default
+
+### Supertypes and Subtypes Entities
+
+To create a relationship that uses this concept, you must first create a regular relationship, then go to its configuration panel and select the subtype in the relationship types section.
+
+When you select it, the relationship's notation will change, and a blue dot will appear next to it, allowing you to add more subtypes to your hierarchy model.
+
+<ThemedImage
+    lightImageSrc={require("./img/light/subtype-relationship.gif").default}
+    darkImageSrc={require("./img/dark/subtype-relationship.gif").default}
+    alt="Create a relationship"
+/>
+
+:::info
+
+To delete any of the subtypes involved in the relationship, simply delete the foreign key that was generated in the child table or access the relationship's configuration panel and delete the desired subtype.
+
+If you wish to delete the entire subtype relationship, simply select the delete relationship button.
+:::
 
 <FAQ header="How can I define Many to Many relationships?">
 

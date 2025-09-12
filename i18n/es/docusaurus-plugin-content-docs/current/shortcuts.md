@@ -28,3 +28,5 @@ sidebar_position: 7
 | Rueda arriba / Rueda abajo | Desplazarse verticalmente |  |
 | SHIFT+Rueda arriba / SHIFT+Rueda abajo | Desplazarse horizontalmente |  |
 | CTRL+H | Abrir atajos |  |
+| CTRL+BACKSPACE / COMMAND+BACKSPACE | Eliminar palabra antes del cursor |  |
+| ALT+CLICK | Seleccionar múltiples elementos | Si deseas seleccionar varios elementos, mantén presionada la tecla ALT mientras haces clic sobre ellos. |
