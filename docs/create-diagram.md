@@ -39,7 +39,9 @@ The following databases are supported:
 - MSSQL
 - Oracle
 
-For the moment the import SQL diagram has not been enabled for Oracle Data Base.
+You can import an existing SQL script to reverse engineer a diagram or start from scratch by picking the blank diagram option.
+
+Additionally, it can be exported to any of the supported RDBMS.
 
 <ThemedImage
     lightImageSrc={require("./img/light/pick-db.png").default}
@@ -56,6 +58,12 @@ Add tables either from the sidebar or the toolbar and define columns.
     darkImageSrc={require("./img/dark/define-tables.gif").default}
     alt="Define tables"
 />
+
+:::info
+
+You can create attributes sequentially by pressing enter in the last field.
+
+:::
 
 ### Table Fields
 
@@ -91,17 +99,48 @@ The check constraint will be injected into the SQL output as is.
 
 :::
 
-:::info
-
-You can create attributes sequentially by pressing enter in the last field.
-
-:::
 
 :::info
 
 To define an attribute as primary key, select the checkbox with a key icon. If you want the attribute to be nullable or not nullable, select the checkbox with a question mark icon.
 
 :::
+
+### More Functions on Tables
+
+- A primary key cannot be nullable.
+
+<ThemedImage
+    lightImageSrc={require("./img/light/pk_notnull.png").default}
+    darkImageSrc={require("./img/dark/pk_notnull.png").default}
+    alt="Primary key not null"
+/>
+
+- Only generating a foreign key from a primary key or from a unique and not null attribute is allowed.
+
+<ThemedImage
+    lightImageSrc={require("./img/light/cannotFk.png").default}
+    darkImageSrc={require("./img/dark/cannotFk.png").default}
+    alt="Cannot create a foreign key"
+/>
+
+- To increase the width of the table, place the cursor on the right edge of the table and then click and drag to adjust the width.
+
+- Also when typing the name of an attribute, if it is too long and takes up more space than previously defined, the width of the table will automatically adjust to fit the new size of the attribute.
+
+<ThemedImage
+    lightImageSrc={require("./img/light/slideTable.gif").default}
+    darkImageSrc={require("./img/dark/slideTable.gif").default}
+    alt="Adjust table"
+/>
+
+- In case you want to quickly find a table in a very large diagram, you can use the search bar located at the top of the tables tab in the left sidebar and then click on the table you want to find. This will open the table's configuration panel where there is a button to center the table in the viewport.
+
+<ThemedImage
+    lightImageSrc={require("./img/light/centerTable.gif").default}
+    darkImageSrc={require("./img/dark/centerTable.gif").default}
+    alt="Center table"
+/>
 
 ### Indexes
 
@@ -123,7 +162,6 @@ To create a relationship and define foreign keys, long-press the blue dot on the
 
 The gif shows one of three possible notations selectable in the modeler; for each notation, the rendering and some actions may change.
 
-<!--If at some point you realize that the keys are flipped you can swap them from the `Relationships` tab. Open the relationship you'd like to edit, click on the more button (three dots) next to the primary and forign columns, and then swap. -->!
 
 :::info
 
@@ -131,11 +169,22 @@ To delete the relationship, simply double-click on the relationship and select t
 
 :::
 
-:::info
 
-To switch between identifying and non-identifying relationships, simply double-click, select the edit icon, or open the child table's configuration panel and modify the primary key attribute. If the foreign key is also part of the primary key, the relationship will be identifying; otherwise, it will be non-identifying.
+If at some point you realize that the keys are flipped you can swap them from the `Relationships` tab. Open the relationship you'd like to edit, click on the more button (three dots) next to the primary and forign columns, and then swap.!
 
-:::
+<ThemedImage
+    lightImageSrc={require("./img/light/swap-keys.gif").default}
+    darkImageSrc={require("./img/dark/swap-keys.gif").default}
+    alt="Swap keys"
+/>
+
+<FAQ header="Why can't I swap the keys?">
+
+If the child table does not contain a primary key, the exchange cannot be performed.
+
+<ThemedImage lightImageSrc={require("./img/light/cannot_swap.png").default} darkImageSrc={require("./img/dark/cannot_swap.png").default} alt="invalid relationship" />
+
+</FAQ>
 
 You can define the following fields for a relationship:
 
@@ -164,6 +213,42 @@ You can define the following fields for a relationship:
   - Set null
   - Set default
 
+### Extra Options for Relationships
+
+- To create a relationship the child table must not contain an attribute with the same name as the parent table's primary key.
+
+<ThemedImage
+    lightImageSrc={require("./img/light/attribute_exists.png").default}
+    darkImageSrc={require("./img/dark/attribute_exists.png").default}
+    alt="Attribute already exists"
+ />
+
+- To define a relationship with a composite primary key, simply drag any of the parent table's primary keys to the child table. This will generate all the necessary foreign keys in the child table.
+
+- To delete this type of relationship, simply delete any of the foreign keys generated in the child table, delete the relationship directly, or delete any of the primary keys involved.
+
+<ThemedImage
+    lightImageSrc={require("./img/light/composedPk.gif").default}
+    darkImageSrc={require("./img/dark/composedPk.gif").default}
+    alt="Composed pk relationship"
+/>
+
+- To switch between identifying and non-identifying relationships, simply open the child table's configuration panel and modify the foreign key attribute. If the foreign key is also part of the primary key, the relationship will be identifying; otherwise, it will be non-identifying.
+
+<ThemedImage
+    lightImageSrc={require("./img/light/identifyingRelation.gif").default}
+    darkImageSrc={require("./img/dark/identifyingRelation.gif").default}
+    alt="Identifying relationship"
+/>
+
+- To define optional or mandatory participation in a relationship, simply edit the child table and modify the foreign key attribute. If the foreign key is nullable, the participation will be optional; otherwise, it will be mandatory.
+
+<ThemedImage
+    lightImageSrc={require("./img/light/optionalParticipation.gif").default}
+    darkImageSrc={require("./img/dark/optionalParticipation.gif").default}
+    alt="Optional participation"
+ />
+
 ### Supertypes and Subtypes Entities
 
 To create a relationship that uses this concept, you must first create a regular relationship, then go to its configuration panel and select the subtype in the relationship types section.
@@ -173,7 +258,7 @@ When you select it, the relationship's notation will change, and a blue dot will
 <ThemedImage
     lightImageSrc={require("./img/light/subtype-relationship.gif").default}
     darkImageSrc={require("./img/dark/subtype-relationship.gif").default}
-    alt="Create a relationship"
+    alt="Define subtypes"
 />
 
 :::info
@@ -189,7 +274,7 @@ In order to model Many to Many relationships you will need to use a join table.
 
 A join table is a third table that contains foreign keys to the 2 tables you'd like to connect. Additionally, you can add any other relationship-specific columns to the table. For example:
 
-<ThemedImage lightImageSrc={require("./img/light/many-to-many.png").default} darkImageSrc={require("./img/dark/many-to-many.png").default} alt="Pick a database" />
+<ThemedImage lightImageSrc={require("./img/light/many-to-many.png").default} darkImageSrc={require("./img/dark/many-to-many.png").default} alt="Many to Many Relationship" />
 
 </FAQ>
 

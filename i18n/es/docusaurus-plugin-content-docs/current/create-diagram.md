@@ -39,7 +39,9 @@ Las siguientes bases de datos son compatibles:
 - MSSQL
 - Oracle
 
-Por el momento, la importación de diagramas SQL no está habilitada para Oracle Database.
+Puedes importar un script SQL existente para realizar ingeniería inversa de un diagrama o comenzar desde cero eligiendo la opción de diagrama en blanco.
+
+Además, puede exportarse a cualquiera de las versiones de RDBMS compatibles.
 
 <ThemedImage
     lightImageSrc={require("./img/light/pick-db.png").default}
@@ -52,10 +54,16 @@ Por el momento, la importación de diagramas SQL no está habilitada para Oracle
 Agrega tablas desde la barra lateral o la barra de herramientas y define las columnas.
 
 <ThemedImage
-    lightImageSrc={require("./img/light/define-tables.gif").default} 
-    darkImageSrc={require("./img/dark/define-tables.gif").default} 
+    lightImageSrc={require("./img/light/define-tables.gif").default}
+    darkImageSrc={require("./img/dark/define-tables.gif").default}
     alt="Definir tablas"
 />
+
+:::info
+
+Se pueden crear atributos secuencialmente presionando enter en el último campo.
+
+:::
 
 ### Campos de la tabla
 
@@ -93,15 +101,45 @@ La restricción de verificación se inyectará en la salida SQL tal como está.
 
 :::info
 
-Se pueden crear atributos secuencialmente presionando enter en el último campo.
-
-:::
-
-:::info
-
 Para definir un atributo como llave primaria, selecciona la casilla con un ícono de llave. Si deseas que el atributo sea nulo o no nulo, selecciona la casilla con un ícono de signo de interrogación.
 
 :::
+
+### Opciones adicionales para tablas
+
+- Una clave primaria no puede ser nula.
+
+<ThemedImage
+    lightImageSrc={require("./img/light/pk_notnull.png").default}
+    darkImageSrc={require("./img/dark/pk_notnull.png").default}
+    alt="Clave primaria no nula"
+/>
+
+- Solo puede generarse una fk a partir de una pk o de un atributo único y no nulo.
+
+<ThemedImage
+    lightImageSrc={require("./img/light/cannotFk.png").default}
+    darkImageSrc={require("./img/dark/cannotFk.png").default}
+    alt="No se puede crear una fk"
+/>
+
+- Para aumentar el ancho de de la tabla, coloca el cursor en el borde derecho de la tabla y luego haz click y arrastra para ajustar el ancho.
+
+- Tambien al escribir el nombre de un atributo, si este es demasiado largo y ocupa más espacio que el definido previamente, el ancho de la tabla se ajustará automáticamente para adaptarse al nuevo tamaño del atributo.
+
+<ThemedImage
+    lightImageSrc={require("./img/light/slideTable.gif").default}
+    darkImageSrc={require("./img/dark/slideTable.gif").default}
+    alt="Ajustar tabla"
+/>
+
+- En dado caso de que quieras encontrar una tabla rápidamente en un diagrama muy grande, puedes usar el buscador que se encunetra en la parte superior de la pestaña de tablas en la barra lateral izquierda y luego dar click en la tabla que deseas encontrar. Esto abrirá el panel de configuración de la tabla en el que se encuntra un botón para centrar la tabla en el viewport.
+
+<ThemedImage
+    lightImageSrc={require("./img/light/centerTable.gif").default}
+    darkImageSrc={require("./img/dark/centerTable.gif").default}
+    alt="Centrar tabla"
+/>
 
 ### Índices
 
@@ -123,19 +161,27 @@ Para crear una relación y definir claves foráneas, mantenga pulsado el punto a
 
 El gif muestra una de las tres posibles notaciones seleccionables en el modelador; para cada notación, la representación y algunas acciones pueden variar.
 
-<!-- Si en algún momento te das cuenta de que las claves están invertidas, puedes intercambiarlas desde la pestaña `Relaciones`. Abre la relación que deseas editar, haz clic en el botón de más (tres puntos) junto a las columnas primaria y foránea, y luego intercambia. -->
-
 :::info
 
 Para eliminar la relación, simplemente haga doble clic en la relación y seleccione el botón Eliminar o elimine la clave foránea generada automáticamente de la tabla.
 
 :::
 
-:::info
+Si en algún momento te das cuenta de que las claves están invertidas, puedes intercambiarlas desde la pestaña `Relaciones`. Abre la relación que deseas editar, haz clic en el botón de más (tres puntos) junto a las columnas primaria y foránea, y luego intercambia.
 
-Para alternar entre relaciones identificativas y no identificativas, basta con dar doble clic, seleccionar el ícono de edición o abrir directamente el panel de configuración de la tabla hija y modificar el atributo de llave primaria. Si la llave foránea también forma parte de la llave primaria, la relación será identificativa; en caso contrario, será no identificativa.
+<ThemedImage
+    lightImageSrc={require("./img/light/swap-keys.gif").default}
+    darkImageSrc={require("./img/dark/swap-keys.gif").default}
+    alt="Intercambiar llaves"
+/>
 
-:::
+<FAQ header="¿Por qué no puedo cambiar las llaves?">
+
+En caso de que la tabla hija no contenga una llave primaria, no se podrá hacer el intercambio.
+
+<ThemedImage lightImageSrc={require("./img/light/cannot_swap.png").default} darkImageSrc={require("./img/dark/cannot_swap.png").default} alt="Relación no válida" />
+
+</FAQ>
 
 Puedes definir los siguientes campos para una relación:
 
@@ -164,6 +210,43 @@ Puedes definir los siguientes campos para una relación:
   - Establecer nulo
   - Establecer por defecto
 
+
+### Opciones adicionales para relaciones
+
+- Para crear una relación la tabla hija no debe de contener un atributo con el mismo nombre que la llave primaria de la tabla padre.
+
+<ThemedImage
+    lightImageSrc={require("./img/light/attribute_exists.png").default}
+    darkImageSrc={require("./img/dark/attribute_exists.png").default}
+    alt="El atributo ya existe"
+/>
+
+- Para definir una relación con una pk compuesta basta con arrastrar cualquiera de las llaves primarias de la tabla padre a la tabla hija. Esto generará todas las llaves foráneas necesarias en la tabla hija.
+
+- Para eliminar esta clase de relacion, basta con eliminar cualquiera de las llaves foráneas generadas en la tabla hija, eliminando directamente la relación o eliminando cualquiera de las llaves primarias involucradas.
+
+<ThemedImage
+    lightImageSrc={require("./img/light/composedPk.gif").default}
+    darkImageSrc={require("./img/dark/composedPk.gif").default}
+    alt="Relación de pk compuesta"
+/>
+
+- Para alternar entre relaciones identificativas y no identificativas, basta con abrir el panel de configuración de la tabla hija y modificar el atributo de llave foránea. Si la llave foránea también forma parte de la llave primaria, la relación será identificativa; en caso contrario, será no identificativa.
+
+<ThemedImage
+    lightImageSrc={require("./img/light/identifyingRelation.gif").default}
+    darkImageSrc={require("./img/dark/identifyingRelation.gif").default}
+    alt="Relación identificativa"
+/>
+
+- Para definir la participación opcional u obligatoria en una relación, basta con editar la tabla hija y modificar el atributo de llave foránea. Si la llave foránea es nula, la participación será opcional; en caso contrario, será obligatoria.
+
+<ThemedImage
+    lightImageSrc={require("./img/light/optionalParticipation.gif").default}
+    darkImageSrc={require("./img/dark/optionalParticipation.gif").default}
+    alt="Participación opcional"
+/>
+
 ### Entidades de Supertipos y Subtipos
 
 Para crear alguna relación que utilice este concepto, es necesario crear en primera instancia una relación comun y corriente para posteriormente ir a su panel de configuración y seleccionar en el apartado de tipos de relaciones el de subtipo.
@@ -173,7 +256,7 @@ Al seleccionarlo, la notación de la relación cambiará y se generará un punto
 <ThemedImage
     lightImageSrc={require("./img/light/subtype-relationship.gif").default}
     darkImageSrc={require("./img/dark/subtype-relationship.gif").default}
-    alt="Create a relationship"
+    alt="Definir subtipos"
 />
 
 :::info
@@ -189,7 +272,7 @@ Para modelar relaciones de muchos a muchos, deberás usar una tabla de unión.
 
 Una tabla de unión es una tercera tabla que contiene claves foráneas a las dos tablas que deseas conectar. Además, puedes agregar cualquier otra columna específica de la relación a la tabla. Por ejemplo:
 
-<ThemedImage lightImageSrc={require("./img/light/many-to-many.png").default} darkImageSrc={require("./img/dark/many-to-many.png").default} alt="Elige una base de datos" />
+<ThemedImage lightImageSrc={require("./img/light/many-to-many.png").default} darkImageSrc={require("./img/dark/many-to-many.png").default} alt="Relación de muchos a muchos" />
 
 </FAQ>
 
