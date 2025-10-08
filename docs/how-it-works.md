@@ -1,10 +1,10 @@
 ---
-sidebar_position: 8
+sidebar_position: 9
 ---
 
 # How it works
 
-drawDB is a simple ReactJS app. Below is a high-level overview of how things are constructed but generally if you're wondering how something works, the first thing that comes to mind is most probably it.  
+drawDB is a simple ReactJS app. Below is a high-level overview of how things are constructed but generally if you're wondering how something works, the first thing that comes to mind is most probably it.
 
 ## Editor canvas
 
